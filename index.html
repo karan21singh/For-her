@@ -3,54 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday Vaniiya ❤️</title>
+<title>Happy Birthday ❤️</title>
 
 <style>
-:root {
-  --p-pink: #ffafbd;
-  --d-pink: #d63384;
-}
+:root { --pink: #d63384; }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
   margin: 0;
+  min-height: 100vh;
   background: #fce4ec;
-  font-family: 'Segoe UI', sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
   overflow-x: hidden;
 }
 
-/* Balloons */
-.balloon {
-  position: absolute;
-  bottom: -100px;
-  width: 30px;
-  height: 40px;
-  border-radius: 50%;
-  animation: floatUp 8s linear infinite;
-  opacity: 0.5;
-  z-index: 1;
-}
-
-@keyframes floatUp {
-  0% { transform: translateY(0); }
-  100% { transform: translateY(-120vh); }
-}
-
-/* Card */
 .card-container {
   perspective: 1200px;
   width: 90vw;
   max-width: 320px;
   height: 470px;
-  position: relative;
-  z-index: 10;
 }
 
 .card {
@@ -61,124 +36,71 @@ body {
   transition: transform 0.8s ease;
 }
 
-.card.open {
-  transform: rotateY(-180deg);
-}
+.card.open { transform: rotateY(-180deg); }
 
-/* Front & Back */
 .card-front,
 .card-back {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   backface-visibility: hidden;
   border-radius: 12px;
   box-shadow: 0 10px 20px rgba(0,0,0,0.15);
 }
 
-/* Front */
 .card-front {
-  background: var(--d-pink);
-  color: white;
+  background: var(--pink);
+  color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 5px solid white;
+  border: 5px solid #fff;
   cursor: pointer;
 }
 
-/* Back (book pages) */
 .card-back {
-  background: white;
   transform: rotateY(180deg);
   display: flex;
   width: 200%;
   left: -100%;
+  background: #fff;
   overflow: hidden;
 }
 
-/* Pages */
 .page {
   width: 50%;
-  height: 100%;
   padding: 10px;
   display: flex;
   flex-direction: column;
-  background: white;
   border-right: 1px solid #eee;
 }
 
-/* Content */
 .main-img {
   width: 100%;
   height: 130px;
   object-fit: contain;
   background: #000;
   border-radius: 8px;
-  border: 2px solid #fff;
 }
 
 .message-text {
   font-size: 9px;
   line-height: 1.4;
-  color: #333;
-  margin-top: 6px;
   padding: 8px;
   background: #fff9fa;
-  border-left: 3px solid var(--d-pink);
+  border-left: 3px solid var(--pink);
   border-radius: 4px;
+  margin-top: 6px;
+  max-height: 250px;
   overflow-y: auto;
-  max-height: 220px;
-}
-
-/* Gallery */
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 4px;
-  margin-top: 8px;
-}
-
-.img-box {
-  position: relative;
-  height: 48px;
-  border-radius: 4px;
-  overflow: hidden;
-  background: #000;
-}
-
-.img-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Caption */
-.caption {
-  position: absolute;
-  inset: 0;
-  background: rgba(214, 51, 132, 0.9);
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 7px;
-  font-weight: bold;
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-.show-caption .caption {
-  opacity: 1;
 }
 
 .footer {
   margin-top: auto;
   text-align: right;
-  color: var(--d-pink);
-  font-weight: bold;
   font-size: 9px;
+  color: var(--pink);
+  font-weight: bold;
 }
 </style>
 </head>
@@ -186,62 +108,63 @@ body {
 <body>
 
 <script>
-function toggleCard(e) {
-  if (e.target.closest('.gallery')) return;
+function toggleCard() {
   document.getElementById('card').classList.toggle('open');
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.img-box').forEach(box => {
-    box.addEventListener('touchstart', () => box.classList.add('show-caption'));
-    box.addEventListener('touchend', () =>
-      setTimeout(() => box.classList.remove('show-caption'), 1200)
-    );
-  });
-
-  for (let i = 0; i < 12; i++) {
-    const b = document.createElement('div');
-    b.className = 'balloon';
-    b.style.left = Math.random() * 100 + 'vw';
-    b.style.animationDelay = Math.random() * 4 + 's';
-    b.style.backgroundColor = `hsl(${Math.random()*360},70%,80%)`;
-    document.body.appendChild(b);
-  }
-});
 </script>
 
 <div class="card-container">
   <div class="card" id="card">
 
-    <div class="card-front" onclick="toggleCard(event)">
+    <!-- FRONT -->
+    <div class="card-front" onclick="toggleCard()">
       <div style="font-size:30px;">🌸🌷</div>
-      <h2 style="font-size:16px;">For You, Vaniiya ❤️</h2>
+      <h2 style="font-size:16px;">For You ❤️</h2>
       <p style="font-size:11px;">TAP TO OPEN ✨</p>
     </div>
 
+    <!-- BACK -->
     <div class="card-back">
-      <div class="page" onclick="toggleCard(event)">
+
+      <!-- LEFT PAGE -->
+      <div class="page" onclick="toggleCard()">
         <img src="IMG_7427.jpeg" class="main-img">
-        <h3 style="color:var(--d-pink);font-size:13px;">Happy Birthday 🎂</h3>
+        <h3 style="color:var(--pink);font-size:13px;">Happy Birthday 🎂</h3>
         <p style="font-size:9px;color:#777;">My Whole Heart ❤️</p>
         <div class="footer">I love you darling 🎉</div>
       </div>
 
+      <!-- RIGHT PAGE -->
       <div class="page">
         <div class="message-text">
-          Stay healthy and happy always... (your full message stays unchanged)
-        </div>
+          <strong>Happy birthday, fuduuu ❤️</strong><br><br>
 
-        <div class="gallery">
-          <div class="img-box"><img src="IMG_7426.jpeg"><div class="caption">MINE ♾️</div></div>
-          <div class="img-box"><img src="IMG_7429.jpeg"><div class="caption">SOULMATE ✨</div></div>
-          <div class="img-box"><img src="IMG_7430.jpeg"><div class="caption">LOVE ❤️</div></div>
+          Stay healthy and happy always. I’m truly glad that I found you in my life
+          you are a genuinely beautiful human being. Since
+          <strong>22 August 2025</strong>, you’ve become an important part of my
+          world, and my life honestly feels more complete with you in it.<br><br>
+
+          I want to share every moment of my life with you, the good and the bad,
+          because you matter to me deeply. You are the one who lifts me up the one
+          who gives me positive energy, and the one I feel truly comfortable with.<br><br>
+
+          I don’t usually get emotional, but somehow, with you, I did and that
+          itself says a lot. Thank you for being in my life, thank you for
+          everything. You are really special to me.<br><br>
+
+          I can’t share you with anyone you are mine, always and forever.
+          May God help fulfill every desire you hold in your heart.
+          and I’m grateful for you every single day<br><br>
+
+          <strong>Once again, happiest birthday Vaniiya ❤️</strong><br>
+
+          <strong>I love you darling 🎉✨❤️</strong>
         </div>
 
         <div class="footer">— Karan</div>
       </div>
-    </div>
 
+    </div>
   </div>
 </div>
 
