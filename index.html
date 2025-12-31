@@ -2,113 +2,248 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Happy Birthday Vaniiya! ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Vaniiya ❤️</title>
+
 <style>
-  :root { --p-pink: #ffafbd; --d-pink: #d63384; }
-  body { margin: 0; background: #fce4ec; overflow: hidden; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; touch-action: manipulation; }
-  
-  .balloon { position: absolute; bottom: -100px; width: 30px; height: 40px; border-radius: 50%; animation: floatUp 8s linear infinite; opacity: 0.5; z-index: 1; }
-  @keyframes floatUp { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(-120vh) rotate(20deg); } }
+:root {
+  --p-pink: #ffafbd;
+  --d-pink: #d63384;
+}
 
-  .card-container { perspective: 1500px; width: 90vw; max-width: 310px; height: 470px; z-index: 10; position: relative; }
-  .card { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
-  
-  /* Open state fix for mobile */
-  .card.open { transform: rotateY(-180deg) translateX(45%); }
-  
-  .card-front, .card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-  
-  .card-front { background: var(--d-pink); color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 5px solid white; box-sizing: border-box; z-index: 2; cursor: pointer; }
-  
-  .card-back { background: white; transform: rotateY(180deg); display: flex; width: 195%; left: -95%; border: 1px solid #ddd; z-index: 1; overflow: hidden; }
-  .page { width: 50%; height: 100%; padding: 10px; box-sizing: border-box; display: flex; flex-direction: column; background: white; border-right: 1px solid #eee; position: relative; }
-  
-  .main-img { width: 100%; height: 130px; object-fit: contain; background: #000; border-radius: 8px; border: 2px solid #fff; }
-  .message-text { font-size: 9px; line-height: 1.4; color: #333; margin-top: 5px; padding: 8px; background: #fff9fa; border-left: 3px solid var(--d-pink); border-radius: 4px; overflow-y: auto; max-height: 230px; }
-  
-  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 8px; }
-  .img-box { position: relative; height: 48px; border-radius: 4px; overflow: hidden; background: #000; cursor: pointer; }
-  .img-box img { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
-  
-  /* Caption Logic for Mobile Tap */
-  .caption { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(214, 51, 132, 0.9); color: white; display: flex; justify-content: center; align-items: center; font-size: 7px; font-weight: bold; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
-  
-  /* Class to show caption on tap */
-  .show-caption .caption { opacity: 1; }
+* {
+  box-sizing: border-box;
+}
 
-  .footer { margin-top: auto; text-align: right; color: var(--d-pink); font-weight: bold; font-size: 9px; padding-top: 4px; }
+body {
+  margin: 0;
+  background: #fce4ec;
+  font-family: 'Segoe UI', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Balloons */
+.balloon {
+  position: absolute;
+  bottom: -100px;
+  width: 30px;
+  height: 40px;
+  border-radius: 50%;
+  animation: floatUp 8s linear infinite;
+  opacity: 0.5;
+  z-index: 1;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-120vh); }
+}
+
+/* Card */
+.card-container {
+  perspective: 1200px;
+  width: 90vw;
+  max-width: 320px;
+  height: 470px;
+  position: relative;
+  z-index: 10;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.8s ease;
+}
+
+.card.open {
+  transform: rotateY(-180deg);
+}
+
+/* Front & Back */
+.card-front,
+.card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+/* Front */
+.card-front {
+  background: var(--d-pink);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 5px solid white;
+  cursor: pointer;
+}
+
+/* Back (book pages) */
+.card-back {
+  background: white;
+  transform: rotateY(180deg);
+  display: flex;
+  width: 200%;
+  left: -100%;
+  overflow: hidden;
+}
+
+/* Pages */
+.page {
+  width: 50%;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-right: 1px solid #eee;
+}
+
+/* Content */
+.main-img {
+  width: 100%;
+  height: 130px;
+  object-fit: contain;
+  background: #000;
+  border-radius: 8px;
+  border: 2px solid #fff;
+}
+
+.message-text {
+  font-size: 9px;
+  line-height: 1.4;
+  color: #333;
+  margin-top: 6px;
+  padding: 8px;
+  background: #fff9fa;
+  border-left: 3px solid var(--d-pink);
+  border-radius: 4px;
+  overflow-y: auto;
+  max-height: 220px;
+}
+
+/* Gallery */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  margin-top: 8px;
+}
+
+.img-box {
+  position: relative;
+  height: 48px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: #000;
+}
+
+.img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Caption */
+.caption {
+  position: absolute;
+  inset: 0;
+  background: rgba(214, 51, 132, 0.9);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 7px;
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.show-caption .caption {
+  opacity: 1;
+}
+
+.footer {
+  margin-top: auto;
+  text-align: right;
+  color: var(--d-pink);
+  font-weight: bold;
+  font-size: 9px;
+}
 </style>
 </head>
+
 <body>
-  <script>
-    // Fix for Mobile Flip
-    function toggleCard(event) {
-      // Prevents flip if touching the gallery photos
-      if (event.target.closest('.gallery')) return;
-      document.getElementById('myCard').classList.toggle('open');
-    }
 
-    // Fix for Photo Tap Messages on Mobile
-    document.addEventListener('DOMContentLoaded', () => {
-      const boxes = document.querySelectorAll('.img-box');
-      boxes.forEach(box => {
-        box.addEventListener('touchstart', function() {
-          this.classList.add('show-caption');
-        });
-        box.addEventListener('touchend', function() {
-          setTimeout(() => this.classList.remove('show-caption'), 1500);
-        });
-        // For Desktop/Tab
-        box.addEventListener('mousedown', function() { this.classList.add('show-caption'); });
-        box.addEventListener('mouseup', function() { this.classList.remove('show-caption'); });
-      });
-    });
+<script>
+function toggleCard(e) {
+  if (e.target.closest('.gallery')) return;
+  document.getElementById('card').classList.toggle('open');
+}
 
-    for(let i=0; i<12; i++) {
-      let b = document.createElement('div'); b.className = 'balloon';
-      b.style.left = Math.random() * 100 + 'vw';
-      b.style.animationDelay = Math.random() * 4 + 's';
-      b.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 80%)`;
-      document.body.appendChild(b);
-    }
-  </script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.img-box').forEach(box => {
+    box.addEventListener('touchstart', () => box.classList.add('show-caption'));
+    box.addEventListener('touchend', () =>
+      setTimeout(() => box.classList.remove('show-caption'), 1200)
+    );
+  });
 
-  <div class="card-container">
-    <div class="card" id="myCard">
-      <div class="card-front" onclick="toggleCard(event)">
-        <div style="font-size: 30px;">🌸🌷</div>
-        <h2 style="font-size: 16px; margin: 10px 0;">For You, Vaniiya ❤️</h2>
-        <p style="font-size: 11px;">TAP TO OPEN ✨</p>
+  for (let i = 0; i < 12; i++) {
+    const b = document.createElement('div');
+    b.className = 'balloon';
+    b.style.left = Math.random() * 100 + 'vw';
+    b.style.animationDelay = Math.random() * 4 + 's';
+    b.style.backgroundColor = `hsl(${Math.random()*360},70%,80%)`;
+    document.body.appendChild(b);
+  }
+});
+</script>
+
+<div class="card-container">
+  <div class="card" id="card">
+
+    <div class="card-front" onclick="toggleCard(event)">
+      <div style="font-size:30px;">🌸🌷</div>
+      <h2 style="font-size:16px;">For You, Vaniiya ❤️</h2>
+      <p style="font-size:11px;">TAP TO OPEN ✨</p>
+    </div>
+
+    <div class="card-back">
+      <div class="page" onclick="toggleCard(event)">
+        <img src="IMG_7427.jpeg" class="main-img">
+        <h3 style="color:var(--d-pink);font-size:13px;">Happy Birthday 🎂</h3>
+        <p style="font-size:9px;color:#777;">My Whole Heart ❤️</p>
+        <div class="footer">I love you darling 🎉</div>
       </div>
 
-      <div class="card-back">
-        <div class="page" onclick="toggleCard(event)" style="cursor: pointer;">
-          <img src="IMG_7427.jpeg" class="main-img">
-          <h3 style="color: var(--d-pink); font-size: 13px; margin: 5px 0 2px;">Happy Birthday! 🎂</h3>
-          <p style="font-size: 9px; color: #777; margin: 0;">My Whole Heart ❤️</p>
-          <div class="footer">I love you darling ♥️</div>
+      <div class="page">
+        <div class="message-text">
+          Stay healthy and happy always... (your full message stays unchanged)
         </div>
 
-        <div class="page">
-          <div class="message-text">
-            Stay healthy and happy always. I’m truly glad that I found you in my life you are a genuinely beautiful human being. Since 22 August 2025, you’ve become an important part of my world, and my life honestly feels more complete with you in it. I want to share every moment of my life with you, the good and the bad, because you matter to me deeply. You are the one who lifts me up the one who gives me positive energy, and the one I feel truly comfortable with. I don’t usually get emotional, but somehow, with you, I did and that itself says a lot. Thank you for being in my life, thank you for everything. You are really special to me. I can’t share you with anyone you are mine, always and forever. May God help fulfill every desire you hold in your heart. and I’m grateful for you every single day once again happiest vaniiya ❤️ I love you darling 🎉✨❤️
-          </div>
-          <div class="gallery">
-            <div class="img-box">
-              <img src="IMG_7426.jpeg"><div class="caption">MINE ♾️</div>
-            </div>
-            <div class="img-box">
-              <img src="IMG_7429.jpeg"><div class="caption">SOULMATE ✨</div>
-            </div>
-            <div class="img-box">
-              <img src="IMG_7430.jpeg"><div class="caption">LOVE ❤️</div>
-            </div>
-          </div>
-          <div class="footer">Karan</div>
+        <div class="gallery">
+          <div class="img-box"><img src="IMG_7426.jpeg"><div class="caption">MINE ♾️</div></div>
+          <div class="img-box"><img src="IMG_7429.jpeg"><div class="caption">SOULMATE ✨</div></div>
+          <div class="img-box"><img src="IMG_7430.jpeg"><div class="caption">LOVE ❤️</div></div>
         </div>
+
+        <div class="footer">— Karan</div>
       </div>
     </div>
+
   </div>
+</div>
+
 </body>
 </html>
