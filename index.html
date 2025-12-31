@@ -7,45 +7,42 @@
 <style>
   :root { --p-pink: #ffafbd; --d-pink: #d63384; }
   body { margin: 0; background: #fce4ec; overflow: hidden; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-  .balloon { position: absolute; bottom: -100px; width: 30px; height: 40px; border-radius: 50%; animation: floatUp 10s linear infinite; opacity: 0.6; z-index: 1; }
+  
+  .balloon { position: absolute; bottom: -100px; width: 30px; height: 40px; border-radius: 50%; animation: floatUp 8s linear infinite; opacity: 0.5; z-index: 1; }
   @keyframes floatUp { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(-120vh) rotate(20deg); } }
 
-  /* Card responsive fix */
-  .card-container { perspective: 1500px; width: 90vw; max-width: 340px; height: 480px; z-index: 10; position: relative; }
-  .card { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; }
+  .card-container { perspective: 1500px; width: 95vw; max-width: 320px; height: 480px; z-index: 10; position: relative; }
+  .card { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; }
+  .card.open { transform: rotateY(-180deg) translateX(35%); }
   
-  /* Open state: shifts card so left page stays on screen */
-  .card.open { transform: rotateY(-180deg) translateX(40%); }
+  .card-front, .card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.15); }
+  .card-front { background: var(--d-pink); color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 5px solid white; box-sizing: border-box; z-index: 2; }
   
-  .card-front, .card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
-  .card-front { background: var(--d-pink); color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 6px solid white; box-sizing: border-box; z-index: 2; text-align: center; }
+  .card-back { background: white; transform: rotateY(180deg); display: flex; width: 180%; left: -80%; border: 1px solid #ddd; z-index: 1; overflow: hidden; }
+  .page { width: 50%; height: 100%; padding: 12px; box-sizing: border-box; display: flex; flex-direction: column; background: white; border-right: 1px solid #eee; }
   
-  /* Back of card (two pages) */
-  .card-back { background: white; transform: rotateY(180deg); display: flex; width: 180%; left: -80%; border: 1px solid #ddd; z-index: 1; }
-  .page { width: 50%; height: 100%; padding: 12px; box-sizing: border-box; overflow-y: auto; display: flex; flex-direction: column; background: white; border-right: 1px solid #eee; }
+  /* Photo Scaling Fix */
+  .main-img { width: 100%; height: 150px; object-fit: contain; background: #fdf2f4; border-radius: 8px; border: 2px solid #fff; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
   
-  .main-img { width: 100%; height: 160px; object-fit: cover; border-radius: 10px; border: 3px solid #fff; box-shadow: 0 5px 10px rgba(0,0,0,0.1); }
-  .message-text { font-size: 10.5px; line-height: 1.4; color: #333; margin-top: 8px; padding: 8px; background: #fff9fa; border-left: 3px solid var(--d-pink); border-radius: 5px; }
+  /* Message Text Styling */
+  .message-text { font-size: 10px; line-height: 1.4; color: #333; margin-top: 5px; padding: 8px; background: #fff9fa; border-left: 3px solid var(--d-pink); border-radius: 4px; overflow-y: auto; max-height: 220px; }
   
-  /* Gallery with tap messages */
-  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; margin-top: 10px; }
-  .img-box { position: relative; height: 65px; border-radius: 5px; overflow: hidden; background: #000; }
-  .img-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.3s; }
+  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 8px; }
+  .img-box { position: relative; height: 55px; border-radius: 4px; overflow: hidden; background: #000; }
+  .img-box img { width: 100%; height: 100%; object-fit: cover; }
   
-  /* Caption that shows on tap/click */
-  .caption { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(214, 51, 132, 0.8); color: white; display: flex; justify-content: center; align-items: center; font-size: 9px; font-weight: bold; opacity: 0; transition: 0.3s; text-align: center; padding: 2px; }
-  .img-box:active .caption, .img-box:hover .caption { opacity: 1; }
-  .img-box:active img { transform: scale(1.1); }
+  .caption { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(214, 51, 132, 0.85); color: white; display: flex; justify-content: center; align-items: center; font-size: 8px; font-weight: bold; opacity: 0; transition: 0.2s; }
+  .img-box:active .caption { opacity: 1; }
 
-  .footer { margin-top: auto; text-align: right; color: var(--d-pink); font-weight: bold; font-size: 11px; padding-top: 5px; }
+  .footer { margin-top: auto; text-align: right; color: var(--d-pink); font-weight: bold; font-size: 10px; padding-top: 4px; }
 </style>
 </head>
 <body>
   <script>
-    for(let i=0; i<15; i++) {
+    for(let i=0; i<12; i++) {
       let b = document.createElement('div'); b.className = 'balloon';
       b.style.left = Math.random() * 100 + 'vw';
-      b.style.animationDelay = Math.random() * 5 + 's';
+      b.style.animationDelay = Math.random() * 4 + 's';
       b.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 80%)`;
       document.body.appendChild(b);
     }
@@ -54,35 +51,25 @@
   <div class="card-container">
     <div class="card" onclick="this.classList.toggle('open')">
       <div class="card-front">
-        <div style="font-size: 40px;">🌷🌸</div>
-        <h2 style="margin: 10px 0; font-size: 20px;">For You, Fuduuu ❤️</h2>
-        <p style="font-size: 14px;">TAP TO OPEN ✨</p>
-        <div style="font-size: 30px; margin-top: 10px;">🎈</div>
+        <div style="font-size: 35px;">🌸🌷</div>
+        <h2 style="font-size: 18px; margin: 10px 0;">For You, Fuduuu ❤️</h2>
+        <p style="font-size: 12px;">TAP TO OPEN ✨</p>
       </div>
       <div class="card-back">
         <div class="page">
           <img src="IMG_7427.jpeg" class="main-img">
-          <h3 style="color: var(--d-pink); font-size: 15px; margin: 8px 0 2px;">Happy Birthday! 🎂</h3>
-          <p style="font-size: 10px; color: #777; margin: 0;">My Whole Heart ❤️</p>
+          <h3 style="color: var(--d-pink); font-size: 14px; margin: 8px 0 2px;">Happy Birthday! 🎂</h3>
+          <p style="font-size: 9px; color: #777; margin: 0;">My Whole Heart ❤️</p>
           <div class="footer">I love you darling ♥️</div>
         </div>
         <div class="page">
           <div class="message-text">
-            Stay healthy and happy always. Since 22 August 2024, you’ve become my world. You are the one who lifts me up and gives me positive energy. You are mine, always and forever. ❤️
+            Stay healthy and happy always. I’m truly glad that I found you in my life you are a genuinely beautiful human being. Since 22 August 2025, you’ve become an important part of my world, and my life honestly feels more complete with you in it. I want to share every moment of my life with you, the good and the bad, because you matter to me deeply. You are the one who lifts me up the one who gives me positive energy, and the one I feel truly comfortable with. I don’t usually get emotional, but somehow, with you, I did and that itself says a lot. Thank you for being in my life, thank you for everything. You are really special to me. I can’t share you with anyone you are mine, always and forever. May God help fulfill every desire you hold in your heart. and I’m grateful for you every single day I love you darling 🎉✨❤️
           </div>
           <div class="gallery">
-            <div class="img-box">
-              <img src="IMG_7426.jpeg">
-              <div class="caption">MINE FOREVER ♾️</div>
-            </div>
-            <div class="img-box">
-              <img src="IMG_7429.jpeg">
-              <div class="caption">SOULMATE ✨</div>
-            </div>
-            <div class="img-box">
-              <img src="IMG_7430.jpeg">
-              <div class="caption">LOVE YOU ❤️</div>
-            </div>
+            <div class="img-box"><img src="IMG_7426.jpeg"><div class="caption">MINE ♾️</div></div>
+            <div class="img-box"><img src="IMG_7429.jpeg"><div class="caption">SOULMATE ✨</div></div>
+            <div class="img-box"><img src="IMG_7430.jpeg"><div class="caption">LOVE ❤️</div></div>
           </div>
           <div class="footer"> Karan</div>
         </div>
