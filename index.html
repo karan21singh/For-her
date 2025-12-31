@@ -5,52 +5,46 @@
 <style>
   :root { --primary-pink: #ffafbd; --dark-pink: #d63384; }
   body { margin: 0; padding: 0; background: linear-gradient(to bottom, #a1c4fd 0%, #c2e9fb 100%); overflow: hidden; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; }
-  .balloon { position: absolute; bottom: -100px; width: 40px; height: 50px; background: var(--primary-pink); border-radius: 50%; animation: floatUp 10s linear infinite; opacity: 0.8; }
-  .balloon::before { content: ""; position: absolute; bottom: -30px; left: 20px; width: 1px; height: 30px; background: rgba(255,255,255,0.6); }
-  @keyframes floatUp { 0% { transform: translateY(0) rotate(0deg); opacity: 1; } 100% { transform: translateY(-120vh) rotate(20deg); opacity: 0; } }
-  .bird { position: absolute; width: 40px; height: 40px; background-image: url('https://cdn-icons-png.flaticon.com/512/524/524739.png'); background-size: contain; background-repeat: no-repeat; animation: flyAcross 15s linear infinite; z-index: 1; }
-  @keyframes flyAcross { 0% { left: -100px; } 100% { left: 110vw; } }
+  .balloon { position: absolute; bottom: -100px; width: 45px; height: 55px; border-radius: 50%; animation: floatUp 12s linear infinite; opacity: 0.7; }
+  @keyframes floatUp { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(-130vh) rotate(20deg); } }
   .card-container { perspective: 2000px; z-index: 10; width: 350px; height: 550px; }
-  .card { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; box-shadow: 0 20px 50px rgba(0,0,0,0.3); border-radius: 15px; }
+  .card { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer; border-radius: 20px; box-shadow: 0 25px 50px rgba(0,0,0,0.2); }
   .card.open { transform: rotateY(-180deg); }
-  .card-front, .card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 15px; overflow: hidden; }
-  .card-front { background: var(--dark-pink); color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 8px solid white; text-align: center; box-sizing: border-box; }
-  .card-back { background: white; transform: rotateY(180deg); display: flex; width: 700px; left: -175px; border: 2px solid #eee; }
-  .page { width: 350px; height: 100%; padding: 25px; box-sizing: border-box; display: flex; flex-direction: column; background: white; }
-  .left-page { border-right: 1px solid #f0f0f0; justify-content: center; align-items: center; }
-  .main-photo { width: 100%; max-height: 400px; object-fit: cover; border-radius: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.15); border: 5px solid white; }
-  .right-page { text-align: left; overflow-y: auto; }
-  .gallery { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-top: 15px; }
-  .gallery img { width: 100%; height: 70px; object-fit: cover; border-radius: 5px; border: 1px solid #ddd; }
-  h2 { color: var(--dark-pink); margin: 0 0 10px 0; font-size: 18px; }
-  .message-text { font-size: 12px; line-height: 1.4; color: #444; }
-  .footer-sig { margin-top: 15px; font-weight: bold; color: var(--dark-pink); text-align: right; font-size: 13px; }
+  .card-front, .card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 20px; overflow: hidden; }
+  .card-front { background: var(--dark-pink); color: white; display: flex; flex-direction: column; justify-content: center; align-items: center; border: 10px solid white; box-sizing: border-box; }
+  .card-back { background: #fff; transform: rotateY(180deg); display: flex; width: 700px; left: -175px; border: 2px solid #fff; }
+  .page { width: 350px; height: 100%; padding: 30px; box-sizing: border-box; display: flex; flex-direction: column; background: white; }
+  .main-photo { width: 100%; border-radius: 15px; border: 8px solid white; box-shadow: 0 10px 25px rgba(0,0,0,0.1); transform: rotate(-2deg); }
+  .gallery { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 20px; }
+  .img-box { position: relative; overflow: hidden; border-radius: 8px; }
+  .gallery img { width: 100%; height: 80px; object-fit: cover; }
+  .caption { position: absolute; bottom: 0; background: rgba(214, 51, 132, 0.85); color: white; font-size: 10px; width: 100%; text-align: center; transform: translateY(100%); transition: 0.3s; padding: 4px 0; }
+  .img-box:active .caption { transform: translateY(0); }
+  .footer-sig { margin-top: auto; font-weight: bold; color: var(--dark-pink); text-align: right; font-size: 15px; }
 </style>
 </head>
 <body>
   <div class="card-container">
-    <div class="card" id="bdayCard" onclick="document.getElementById('bdayCard').classList.toggle('open')">
+    <div class="card" onclick="this.classList.toggle('open')">
       <div class="card-front">
-        <h1 style="font-size: 60px; margin: 0;">💝</h1>
-        <h2 style="color: white; font-size: 24px;">Happy Birthday, Fuduuu!</h2>
-        <p>Tap to open ✨</p>
+        <h1 style="font-size: 80px; margin:0;">💝</h1>
+        <h2>For You, Fuduuu</h2>
+        <p>TAP TO OPEN ✨</p>
       </div>
       <div class="card-back">
-        <div class="page left-page">
-          <img src="https://i.ibb.co/DfQXprhp/IMG-7427.jpg" class="main-photo">
-          <p style="margin-top: 10px; font-style: italic; color: #888; font-size: 11px;">Forever & Always ♾️</p>
+        <div class="page" style="border-right: 1px solid #fce4ec; align-items: center; justify-content: center;">
+          <img src="https://i.postimg.cc/0jYmP3V1/IMG-7427.jpg" class="main-photo">
+          <p style="margin-top: 20px; color: #d63384; font-weight: bold;">My Whole Heart ❤️</p>
         </div>
-        <div class="page right-page">
-          <h2>Happy birthday, fuduuu ❤️</h2>
-          <div class="message-text">
-            Stay healthy and happy always. I’m truly glad that I found you in my life you are a genuinely beautiful human being. Since 22 August 2025, you’ve become an important part of my world, and my life honestly feels more complete with you in it. I want to share every moment of my life with you, the good and the bad, because you matter to me deeply. You are the one who lifts me up the one who gives me positive energy, and the one I feel truly comfortable with. I don’t usually get emotional, but somehow, with you, I did and that itself says a lot. Thank you for being in my life, thank you for everything. You are really special to me. I can’t share you with anyone you are mine, always and forever. May God help fulfill every desire you hold in your heart. and I’m grateful for you every single day.
-          </div>
+        <div class="page">
+          <h2 style="color: var(--dark-pink); margin:0;">Happy birthday, fuduuu 🌸</h2>
+          <p style="font-size: 12px; line-height: 1.5; color: #444; margin: 15px 0;">Stay healthy and happy always. Since 22nd August 2024, you’ve become an important part of my world. You give me the best energy. You are mine, always and forever. ❤️</p>
           <div class="gallery">
-            <img src="https://i.ibb.co/3ygbYjYR/IMG-7426.jpg">
-            <img src="https://i.ibb.co/s9svLK2d/IMG-7429.jpg">
-            <img src="https://i.ibb.co/RGZDWfTJ/IMG-7430.jpg">
+            <div class="img-box"><img src="https://i.postimg.cc/mD8P8pTr/IMG-7426.jpg"><div class="caption">Soulmate ♾️</div></div>
+            <div class="img-box"><img src="https://i.postimg.cc/SRhDCH8j/IMG-7429.jpg"><div class="caption">Mine ✨</div></div>
+            <div class="img-box"><img src="https://i.postimg.cc/8PzS7K3P/IMG-7430.jpg"><div class="caption">Love You ❤️</div></div>
           </div>
-          <div class="footer-sig">I love you darling ❤️🤌<br>— Yours, Karan</div>
+          <div class="footer-sig">I love you darling ❤️🤌<br>— Karan</div>
         </div>
       </div>
     </div>
@@ -58,13 +52,10 @@
   <script>
     for(let i=0; i<15; i++) {
       let b = document.createElement('div'); b.className = 'balloon';
-      b.style.left = Math.random() * 100 + 'vw'; b.style.animationDelay = Math.random() * 8 + 's';
-      b.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 85%)`; document.body.appendChild(b);
-    }
-    for(let i=0; i<3; i++) {
-      let bird = document.createElement('div'); bird.className = 'bird';
-      bird.style.top = (10 + Math.random() * 30) + '%'; bird.style.animationDelay = (i * 5) + 's';
-      document.body.appendChild(bird);
+      b.style.left = Math.random() * 100 + 'vw';
+      b.style.animationDelay = Math.random() * 8 + 's';
+      b.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 85%)`;
+      document.body.appendChild(b);
     }
   </script>
 </body>
