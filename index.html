@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Happy Birthday Fuduuu! ❤️</title>
+<title>Happy Birthday Vaniiya! ❤️</title>
 <style>
   :root { --p-pink: #ffafbd; --d-pink: #d63384; }
   body { margin: 0; background: #fce4ec; overflow: hidden; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
@@ -13,8 +13,6 @@
 
   .card-container { perspective: 1500px; width: 90vw; max-width: 310px; height: 470px; z-index: 10; position: relative; }
   .card { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1); }
-  
-  /* Shifts the card to center when opened on phone */
   .card.open { transform: rotateY(-180deg) translateX(45%); }
   
   .card-front, .card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
@@ -24,16 +22,17 @@
   .page { width: 50%; height: 100%; padding: 10px; box-sizing: border-box; display: flex; flex-direction: column; background: white; border-right: 1px solid #eee; }
   
   .main-img { width: 100%; height: 130px; object-fit: contain; background: #000; border-radius: 8px; border: 2px solid #fff; }
-  
-  /* Message Text Styling - Your FULL Message */
   .message-text { font-size: 9px; line-height: 1.4; color: #333; margin-top: 5px; padding: 8px; background: #fff9fa; border-left: 3px solid var(--d-pink); border-radius: 4px; overflow-y: auto; max-height: 230px; text-align: left; }
   
   .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 8px; }
-  .img-box { position: relative; height: 48px; border-radius: 4px; overflow: hidden; background: #000; cursor: pointer; }
+  .img-box { position: relative; height: 48px; border-radius: 4px; overflow: hidden; background: #000; cursor: pointer; -webkit-tap-highlight-color: transparent; }
   .img-box img { width: 100%; height: 100%; object-fit: cover; }
   
-  .caption { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(214, 51, 132, 0.9); color: white; display: flex; justify-content: center; align-items: center; font-size: 7px; font-weight: bold; opacity: 0; transition: 0.2s; pointer-events: none; }
-  .img-box:active .caption { opacity: 1; }
+  /* Photo Message Logic: Shows on Touch/Tap */
+  .caption { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(214, 51, 132, 0.9); color: white; display: flex; justify-content: center; align-items: center; font-size: 7px; font-weight: bold; opacity: 0; transition: opacity 0.3s; z-index: 5; }
+  
+  /* Tap to reveal effect */
+  .img-box:active .caption, .img-box:hover .caption { opacity: 1; }
 
   .footer { margin-top: auto; text-align: right; color: var(--d-pink); font-weight: bold; font-size: 9px; padding-top: 4px; }
 </style>
@@ -54,7 +53,7 @@
     <div class="card" id="myCard">
       <div class="card-front" onclick="toggleCard()">
         <div style="font-size: 30px;">🌸🌷</div>
-        <h2 style="font-size: 16px; margin: 10px 0;">For You, Fuduuu ❤️</h2>
+        <h2 style="font-size: 16px; margin: 10px 0;">For You, Vaniiya ❤️</h2>
         <p style="font-size: 11px;">TAP TO OPEN ✨</p>
       </div>
 
@@ -68,7 +67,7 @@
 
         <div class="page">
           <div class="message-text">
-            Stay healthy and happy always. I’m truly glad that I found you in my life you are a genuinely beautiful human being. Since 22 August 2025, you’ve become an important part of my world, and my life honestly feels more complete with you in it. I want to share every moment of my life with you, the good and the bad, because you matter to me deeply. You are the one who lifts me up the one who gives me positive energy, and the one I feel truly comfortable with. I don’t usually get emotional, but somehow, with you, I did and that itself says a lot. Thank you for being in my life, thank you for everything. You are really special to me. I can’t share you with anyone you are mine, always and forever. May God help fulfill every desire you hold in your heart. and I’m grateful for you every single day once again happiest vaniiya ❤️ I love you darling 🎉✨❤️
+            Stay healthy and happy always. I’m truly glad that I found you in my life you are a genuinely beautiful human being. Since 22 August 2024, you’ve become an important part of my world, and my life honestly feels more complete with you in it. I want to share every moment of my life with you, the good and the bad, because you matter to me deeply. You are the one who lifts me up the one who gives me positive energy, and the one I feel truly comfortable with. I don’t usually get emotional, but somehow, with you, I did and that itself says a lot. Thank you for being in my life, thank you for everything. You are really special to me. I can’t share you with anyone you are mine, always and forever. May God help fulfill every desire you hold in your heart. and I’m grateful for you every single day once again happiest vaniiya ❤️ I love you darling 🎉✨❤️
           </div>
           <div class="gallery">
             <div class="img-box"><img src="IMG_7426.jpeg"><div class="caption">MINE ♾️</div></div>
